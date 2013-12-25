@@ -1,0 +1,28 @@
+# Heart Rate Monitor
+
+An investigation into Blutetooth LE
+
+[Jesse Collis][1] 2013
+
+## December 2013 - Work in Progress
+
+
+## Resources
+
+- http://www.raywenderlich.com/52080/introduction-core-bluetooth-building-heart-rate-monitor
+- Apple WWDC Videos 2012/2013
+
+## Blutetooh links
+
+https://www.bluetooth.org/en-us/specification/assigned-numbers/health-device-profile
+
+http://weblog.invasivecode.com/post/39707371281/core-bluetooth-for-ios-6-core-bluetooth-was
+
+## Calorie Calculations
+
+http://fitness.stackexchange.com/questions/12435/is-it-possible-to-measure-calorie-burn-from-heart-rate-alonev
+
+
+
+
+[1]: http://twitter.com/sirjec
