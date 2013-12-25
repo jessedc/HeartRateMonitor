@@ -20,7 +20,10 @@
 #define HRM_MANUFACTURER_NAME_CHARACTERISTIC @"2A29" //org.bluetooth.characteristic.manufacturer_name_string
 
 
-@interface JCViewController ()
+@interface JCViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
+
+@property (nonatomic, strong) CBCentralManager *centralManager;
+@property (nonatomic, strong) CBPeripheral *blueHRPeripheral;
 
 @end
 
@@ -36,6 +39,58 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - CBCentralManagerDelegate
+
+- (void)centralManager:(CBCentralManager *)central   didConnectPeripheral:(CBPeripheral *)peripheral
+{
+
+}
+
+- (void)centralManager:(CBCentralManager *)central   didDiscoverPeripheral:(CBPeripheral *)peripheral   advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+{
+
+}
+
+- (void)centralManagerDidUpdateState:(CBCentralManager *)central
+{
+
+}
+
+#pragma mark - CBPeripheralDelegate
+
+- (void)peripheral:(CBPeripheral *)peripheral   didDiscoverServices:(NSError *)error
+{
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral   didDiscoverCharacteristicsForService:(CBService *)service   error:(NSError *)error
+{
+
+}
+
+- (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+
+}
+
+#pragma mark - CBCharacteristic helpers (Ray Wenderlich)
+
+- (void) getHeartBPMData:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+}
+
+- (void) getManufacturerName:(CBCharacteristic *)characteristic
+{
+}
+
+- (void) getBodyLocation:(CBCharacteristic *)characteristic
+{
+}
+
+- (void)doHeartBeat
+{
 }
 
 @end
