@@ -2,7 +2,7 @@
 
 An investigation into Blutetooth LE
 
-[Jesse Collis][1] 2013
+Jesse Collis 2013
 
 ## December 2013 - Work in Progress
 
@@ -22,7 +22,9 @@ http://weblog.invasivecode.com/post/39707371281/core-bluetooth-for-ios-6-core-bl
 
 http://fitness.stackexchange.com/questions/12435/is-it-possible-to-measure-calorie-burn-from-heart-rate-alonev
 
+## Charts
 
+https://github.com/Jawbone/JBChartView
 
 
 [1]: http://twitter.com/sirjec
