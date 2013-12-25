@@ -25,6 +25,16 @@
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *blueHRPeripheral;
 
+@property (nonatomic, strong) IBOutlet UITextView *deviceInfo;
+@property (nonatomic, strong) NSString *connected;
+@property (nonatomic, strong) NSString *bodyData;
+@property (nonatomic, strong) NSString *manufacturer;
+@property (nonatomic, strong) NSString *deviceData;
+@property (nonatomic, assign) uint16_t heartRate;
+
+@property (nonatomic, strong) UILabel *heartRateBPM;
+@property (nonatomic, strong) NSTimer *pulseTimer;
+
 @end
 
 @implementation JCViewController
@@ -32,13 +42,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Characteristic Getter Instance Methods
+
+- (void)getHeartBPMData:(CBCharacteristic *)characteristic error:(NSError *)error
+{
+
+}
+
+- (void)getManufacturerName:(CBCharacteristic *)characteristic
+{
+
+}
+
+- (void)getBodyLocation:(CBCharacteristic *)characteristic
+{
+
 }
 
 #pragma mark - CBCentralManagerDelegate
@@ -73,24 +98,6 @@
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
 
-}
-
-#pragma mark - CBCharacteristic helpers (Ray Wenderlich)
-
-- (void) getHeartBPMData:(CBCharacteristic *)characteristic error:(NSError *)error
-{
-}
-
-- (void) getManufacturerName:(CBCharacteristic *)characteristic
-{
-}
-
-- (void) getBodyLocation:(CBCharacteristic *)characteristic
-{
-}
-
-- (void)doHeartBeat
-{
 }
 
 @end
