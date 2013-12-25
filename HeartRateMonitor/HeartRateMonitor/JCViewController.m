@@ -32,7 +32,7 @@
 @property (nonatomic, strong) NSString *deviceData;
 @property (nonatomic, assign) uint16_t heartRate;
 
-@property (nonatomic, strong) UILabel *heartRateBPM;
+@property (nonatomic, strong) IBOutlet UILabel *heartRateBPM;
 @property (nonatomic, strong) NSTimer *pulseTimer;
 
 @end

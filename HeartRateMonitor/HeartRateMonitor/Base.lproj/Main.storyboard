@@ -26,28 +26,42 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Heart Rate Monitor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDc-00-Cph">
-                                <rect key="frame" x="54" y="31" width="213" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Heart Rate Monitor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PDc-00-Cph">
+                                <rect key="frame" x="71" y="31" width="179" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="5tN-Wb-DxC"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="QNf-b5-RWx"/>
+                                    <constraint firstAttribute="width" constant="179" id="ymV-Js-G5y"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="HR: 0 BPM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOB-NS-T1Y">
+                                <rect key="frame" x="117" y="72" width="86" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="whn-d7-MSk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="6Dp-Lo-LCa" secondAttribute="bottom" id="5oM-V7-Pg9"/>
+                            <constraint firstItem="vOB-NS-T1Y" firstAttribute="top" secondItem="PDc-00-Cph" secondAttribute="bottom" constant="20" id="AEx-No-v07"/>
                             <constraint firstItem="PDc-00-Cph" firstAttribute="top" secondItem="EnC-rB-zIb" secondAttribute="bottom" constant="11" id="V8q-Vq-Wag"/>
                             <constraint firstItem="6Dp-Lo-LCa" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="aZi-jB-xbg"/>
                             <constraint firstItem="6Dp-Lo-LCa" firstAttribute="centerX" secondItem="PDc-00-Cph" secondAttribute="centerX" id="oO2-vI-DuG"/>
                             <constraint firstAttribute="trailing" secondItem="6Dp-Lo-LCa" secondAttribute="trailing" id="sad-LB-ceG"/>
+                            <constraint firstItem="vOB-NS-T1Y" firstAttribute="centerX" secondItem="PDc-00-Cph" secondAttribute="centerX" id="xCs-pc-tCb"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="deviceInfo" destination="6Dp-Lo-LCa" id="x2p-aR-3l4"/>
+                        <outlet property="heartRateBPM" destination="vOB-NS-T1Y" id="A47-vg-YIi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
