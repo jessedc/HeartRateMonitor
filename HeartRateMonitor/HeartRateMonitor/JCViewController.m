@@ -19,7 +19,6 @@
 #define HRM_BODY_LOCATION_CHARACTERISTIC @"2A38" //org.bluetooth.characteristic.blood_pressure_measurement
 #define HRM_MANUFACTURER_NAME_CHARACTERISTIC @"2A29" //org.bluetooth.characteristic.manufacturer_name_string
 
-
 @interface JCViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
@@ -55,9 +54,32 @@
 
 #pragma mark - Characteristic Getter Instance Methods
 
+
+
 - (void)getHeartBPMData:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+    NSData *data = characteristic.value;
+    //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
+    // [8bit-flags [0-format][12-contact-status][3-energry][4-interval][567-NaN][8bit-integer]
+    const uint8_t *reportData = [data bytes];
+    uint16_t bpm = 0;
 
+    if ((reportData[0] & 0x01) == 0) //Format is set to UINT8
+    {
+        bpm = reportData[1]; //grab the second byte directly, put it in the bigger container bpm
+    }
+    else //Format is set to UINT16
+    {
+        //FIXME: not tested
+        uint16_t *pointerToSecondByte = (uint16_t *)(&reportData[1]);
+        bpm = CFSwapInt16LittleToHost(*pointerToSecondByte);
+    }
+
+    if ((characteristic.value) || !error)
+    {
+        self.heartRate = bpm;
+        self.heartRateBPM.text = [NSString stringWithFormat:@"HR: %i BPM", bpm];
+    }
 }
 
 - (void)getManufacturerName:(CBCharacteristic *)characteristic
@@ -74,7 +96,18 @@
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
+    peripheral.delegate = self;
 
+    NSArray *services = @[ [CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE], [CBUUID UUIDWithString:HRM_HEAT_RATE_SERVICE]];
+    [peripheral discoverServices:services];
+    self.connected = [NSString stringWithFormat:@"connected: %@", peripheral.state == CBPeripheralStateConnected ? @"YES" : @"NO"];
+    NSLog(@"%@", self.connected);
+}
+
+- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    //TODO: Error case
+    NSLog(@"did fail to connect");
 }
 
 - (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
@@ -134,17 +167,74 @@
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
+    for (CBService *service in peripheral.services)
+    {
+        NSArray *chars;
+        if ([service.UUID isEqual:[CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE]])
+        {
+            chars = @[[CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC]];
 
+        }
+        else if ([service.UUID isEqual:[CBUUID UUIDWithString:HRM_HEAT_RATE_SERVICE]])
+        {
+            chars = @[[CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC],
+                      [CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC]];
+        }
+
+        [peripheral discoverCharacteristics:chars forService:service];
+    }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
 
+    NSAssert(peripheral == self.blueHRPeripheral, @"I'm expecting the peripheral is the same as the one I was using before");
+
+    //FIXME: JC - I subscribed explicitly to these characteristics. I shouldn't have to check them twice, except for the case
+    // where I want to setNotifyValue instead of readValue;
+
+    if ([service.UUID isEqual:[CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE]])
+    {
+        for (CBCharacteristic *aChar in service.characteristics)
+        {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC]])
+            {
+                [peripheral readValueForCharacteristic:aChar];
+            }
+        }
+    }
+    else if ([service.UUID isEqual:[CBUUID UUIDWithString:HRM_HEAT_RATE_SERVICE]])
+    {
+        for (CBCharacteristic *aChar in service.characteristics)
+        {
+            if ([aChar.UUID isEqual:[CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC]])
+            {
+                [peripheral setNotifyValue:YES forCharacteristic:aChar];
+            }
+            else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC]])
+            {
+                [peripheral readValueForCharacteristic:aChar];
+            }
+        }
+    }
 }
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
+    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC]])
+    {
+        [self getHeartBPMData:characteristic error:error];
+    }
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC]])
+    {
+        [self getManufacturerName:characteristic];
+    }
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC]])
+    {
+        [self getBodyLocation:characteristic];
+    }
 
+    self.deviceInfo.text = [NSString stringWithFormat:@"%@\n%@\n%@\n", self.connected, self.bodyData, self.manufacturer];
 }
 
 @end
