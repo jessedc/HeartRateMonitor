@@ -1,30 +1,31 @@
 # Heart Rate Monitor
 
-An investigation into Blutetooth LE
+An investigation into Blutetooth LE by Jesse Collis
 
-Jesse Collis 2013
+## Status
 
-## December 2013 - Work in Progress
-
+- **December 2013** - Work in Progress
 
 ## Resources
 
+### iOS Development Resources
+
 - http://www.raywenderlich.com/52080/introduction-core-bluetooth-building-heart-rate-monitor
-- Apple WWDC Videos 2012/2013
+- Apple WWDC Videos 2012/2013 (to be linked)
+- [JBChartView for charts](https://github.com/Jawbone/JBChartView)
+- [Chris Miles - Bluetooth LE with CoreBluetooth Presentation](http://blog.chrismiles.info/2013/03/bluetooth-le-with-corebluetooth.html)
+- http://weblog.invasivecode.com/post/39707371281/core-bluetooth-for-ios-6-core-bluetooth-was
 
-## Blutetooh links
+### Blutetooh.org links
 
-https://www.bluetooth.org/en-us/specification/assigned-numbers/health-device-profile
+- https://www.bluetooth.org/en-us/specification/assigned-numbers/health-device-profile
+- [Bluetooth LE Services Reference](https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx)
+- [Bluetooth LE Characteristics Reference](https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicsHome.aspx)
 
-http://weblog.invasivecode.com/post/39707371281/core-bluetooth-for-ios-6-core-bluetooth-was
-
-## Calorie Calculations
+### Calorie Calculations
 
 http://fitness.stackexchange.com/questions/12435/is-it-possible-to-measure-calorie-burn-from-heart-rate-alonev
 
-## Charts
+### Bluetooth LE Hardware
 
-https://github.com/Jawbone/JBChartView
-
-
-[1]: http://twitter.com/sirjec
+- [Wahoo BlueHR](http://www.wahoofitness.com/wahoo-blue-hr-heart-rate-strap.html)
