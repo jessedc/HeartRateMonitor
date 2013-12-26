@@ -23,14 +23,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    self.heartRateMonitor = [[JCHeartRateMonitor alloc] init];
-    self.heartRateMonitor.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - 
+
+- (void)configureWithHeartRateMonitor:(JCHeartRateMonitor *)monitor
+{
+    self.heartRateMonitor = monitor;
+    self.heartRateMonitor.delegate = self;
 }
 
 #pragma mark - JCHeartRateMonitorDelegate

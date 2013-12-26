@@ -119,9 +119,6 @@
     {
         [strongDelegate manager:self didFailToConnectPeripheral:peripheral error:error];
     }
-
-    //TODO: Error case
-    NSLog(@"did fail to connect");
 }
 
 @end

@@ -46,12 +46,6 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
 @interface JCHeartRateMonitor() <CBPeripheralDelegate>
 
-@property (nonatomic, strong) CBCentralManager *centralManager;
-
-//Bluetooth Services
-@property (nonatomic, strong) CBUUID *heartRateService;
-@property (nonatomic, strong) CBUUID *deviceInfoService;
-
 //Bluetooth Characteristics
 @property (nonatomic, strong) CBUUID *heartRateMeasurementCharacteristic;
 @property (nonatomic, strong) CBUUID *bodyLocationCharacteristic;
@@ -85,10 +79,9 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
         self.manufacturerNameCharacteristic = [CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC];
         self.bodyLocationCharacteristic = [CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC];
 
-//        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-
         self.heartRatePeripheral = peripheral;
         self.heartRatePeripheral.delegate = self;
+        [self.heartRatePeripheral discoverServices:self.bluetoothServices];
     }
     return self;
 }
@@ -100,41 +93,6 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
     return self.heartRatePeripheral.identifier;
 }
 
-#pragma mark - CBCentralManagerDelegate
-
-//- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
-//{
-//    NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
-//    NSLog(@"Discovered the peripheral with name: %@", localName);
-//
-//    //FIXME: JC - Why check for a length?
-//    if (localName.length > 0)
-//    {
-//        [self.centralManager stopScan];
-//        self.heartRatePeripheral = peripheral;
-//
-//        self.heartRatePeripheral.delegate = self;
-//        [self.centralManager connectPeripheral:peripheral options:nil];
-//    }
-//}
-
-//- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
-//{
-//    NSAssert(peripheral == self.heartRatePeripheral, @"expecting these to be the same object");
-//
-//    [self.heartRatePeripheral discoverServices:self.bluetoothServices];
-//
-//    //TODO: Connected Case
-////    self.connected = [NSString stringWithFormat:@"connected: %@", peripheral.state == CBPeripheralStateConnected ? @"YES" : @"NO"];
-////    NSLog(@"%@", self.connected);
-//}
-
-//- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
-//{
-//    //TODO: Error case
-//    NSLog(@"did fail to connect");
-//}
-
 #pragma mark - CBPeripheralDelegate
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
@@ -144,12 +102,12 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
         NSLog(@"found service: %@", service.UUID);
 
         NSArray *chars;
-        if ([service.UUID isEqual:self.deviceInfoService])
+        if ([service.UUID isEqual:[[self class] bluetoothServices][1]])
         {
             chars = @[self.manufacturerNameCharacteristic];
 
         }
-        else if ([service.UUID isEqual:self.heartRateService])
+        else if ([service.UUID isEqual:[[self class] bluetoothServices][0]])
         {
             chars = @[self.heartRateMeasurementCharacteristic];
         }
@@ -160,11 +118,10 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-
     //FIXME: JC - I subscribed explicitly to these characteristics. I shouldn't have to check them twice, except for the case
     // where I want to setNotifyValue instead of readValue;
 
-    if ([service.UUID isEqual:self.deviceInfoService])
+    if ([service.UUID isEqual:[[self class] bluetoothServices][1]])
     {
         for (CBCharacteristic *aChar in service.characteristics)
         {
@@ -174,7 +131,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
             }
         }
     }
-    else if ([service.UUID isEqual:self.heartRateService])
+    else if ([service.UUID isEqual:[[self class] bluetoothServices][0]])
     {
         for (CBCharacteristic *aChar in service.characteristics)
         {
@@ -188,11 +145,11 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
 - (void)peripheral:(CBPeripheral *)peripheral didUpdateValueForCharacteristic:(CBCharacteristic *)characteristic error:(NSError *)error
 {
-    if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC]])
+    if ([characteristic.UUID isEqual:self.heartRateMeasurementCharacteristic])
     {
         [self getHeartBPMData:characteristic error:error];
     }
-    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC]])
+    else if ([characteristic.UUID isEqual:self.manufacturerNameCharacteristic])
     {
         [self getManufacturerName:characteristic];
     }
@@ -239,7 +196,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
         bpm = CFSwapInt16LittleToHost(*pointerToSecondByte);
     }
 
-    if ((characteristic.value) || !error)
+    if (characteristic.value || !error)
     {
         JCHeartRateMeasurement *measurement = [[JCHeartRateMeasurement alloc] init];
         measurement.beatsPerMinute = @(bpm);

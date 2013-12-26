@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class JCHeartRateMonitor;
+
 @interface JCViewController : UIViewController
+
+- (void)configureWithHeartRateMonitor:(JCHeartRateMonitor *)monitor;
 
 @end

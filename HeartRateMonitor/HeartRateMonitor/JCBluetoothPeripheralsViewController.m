@@ -8,8 +8,9 @@
 
 #import "JCBluetoothPeripheralsViewController.h"
 #import "JCHeartRateDeviceManager.h"
+#import "JCViewController.h"
 
-@interface JCBluetoothPeripheralsViewController ()
+@interface JCBluetoothPeripheralsViewController () <JCHeartDateDeviceManagerDelegate>
 @property (nonatomic, strong) JCHeartRateDeviceManager *deviceManager;
 @end
 
@@ -20,6 +21,8 @@
     [super viewDidLoad];
 
     self.deviceManager = [[JCHeartRateDeviceManager alloc] init];
+    self.deviceManager.delegate = self;
+
     [self.deviceManager addObserver:self forKeyPath:@"peripherals" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];
 
     self.clearsSelectionOnViewWillAppear = YES;
@@ -29,6 +32,8 @@
 {
     [super viewDidAppear:animated];
     [self.deviceManager startScanning];
+
+    [self.tableView reloadData];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -77,12 +82,30 @@
     return cell;
 }
 
-
 #pragma mark - Table View Delegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    JCBluetoothPeripheral *p = [self.deviceManager.peripherals objectAtIndex:indexPath.row];
+    [self.deviceManager connectPeripheral:p];
+}
+
+#pragma mark - JCHeartDateDeviceManagerDelegate
+
+- (void)manager:(JCHeartRateDeviceManager *)manager didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Connection Fail" message:@"did fail to connect to peripheral" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
+
+    [self.tableView deselectRowAtIndexPath:self.tableView.indexPathForSelectedRow animated:YES];
+}
+
+- (void)manager:(JCHeartRateDeviceManager *)manager didConnectHeartRateMonitor:(JCHeartRateMonitor *)monitor
+{
+    JCViewController *heartRateController = [self.storyboard instantiateViewControllerWithIdentifier:@"HeartRateController"];
+    [heartRateController configureWithHeartRateMonitor:monitor];
+
+    [self.navigationController pushViewController:heartRateController animated:YES];
 }
 
 @end

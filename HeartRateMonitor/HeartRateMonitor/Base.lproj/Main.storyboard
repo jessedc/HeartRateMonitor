@@ -63,7 +63,7 @@
         <!--View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="JCViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HeartRateController" id="vXZ-lx-hvc" customClass="JCViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="EnC-rB-zIb"/>
                         <viewControllerLayoutGuide type="bottom" id="eXU-Qg-gaF"/>
