@@ -42,6 +42,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+
+    NSArray *services = @[[CBUUID UUIDWithString:HRM_HEAT_RATE_SERVICE], [CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE] ];
+    self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
+    [self.centralManager scanForPeripheralsWithServices:services options:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,29 +72,72 @@
 
 #pragma mark - CBCentralManagerDelegate
 
-- (void)centralManager:(CBCentralManager *)central   didConnectPeripheral:(CBPeripheral *)peripheral
+- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
 {
 
 }
 
-- (void)centralManager:(CBCentralManager *)central   didDiscoverPeripheral:(CBPeripheral *)peripheral   advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
 {
-
+    NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
+    //FIXME: JC - Why check for a length?
+    if (localName.length > 0)
+    {
+        NSLog(@"Found the HRM: %@", localName);
+        [self.centralManager stopScan];
+        self.blueHRPeripheral = peripheral;
+        peripheral.delegate = self;
+        [self.centralManager connectPeripheral:peripheral options:nil];
+    }
 }
 
 - (void)centralManagerDidUpdateState:(CBCentralManager *)central
 {
+    switch (central.state)
+    {
+        case CBCentralManagerStatePoweredOff:
+        {
+            NSLog(@"CoreBluetooth didUpdateState: hardware is powered off.");
+            break;
+        }
+        case CBCentralManagerStatePoweredOn:
+        {
+            NSLog(@"CoreBluetooth didUpdateState: hardware is powered on.");
+            break;
+        }
+        case CBCentralManagerStateUnauthorized:
+        {
+            NSLog(@"CoreBluetooth didUpdateState: unauthorized.");
+            break;
+        }
+        case CBCentralManagerStateResetting:
+        {
+            NSLog(@"CoreBluetooth didUpdateState: hardware is resetting.");
+            break;
+        }
+        case CBCentralManagerStateUnsupported:
+        {
+            NSLog(@"CoreBluetooth didUpdateState: hardware is unsupported.");
+            break;
+        }
+        default:
+        case CBCentralManagerStateUnknown:
+        {
+            NSLog(@"CoreBluetooth didUpdateState: state is unknown.");
+            break;
+        }
+    }
 
 }
 
 #pragma mark - CBPeripheralDelegate
 
-- (void)peripheral:(CBPeripheral *)peripheral   didDiscoverServices:(NSError *)error
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverServices:(NSError *)error
 {
 
 }
 
-- (void)peripheral:(CBPeripheral *)peripheral   didDiscoverCharacteristicsForService:(CBService *)service   error:(NSError *)error
+- (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
 
 }
