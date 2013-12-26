@@ -12,10 +12,13 @@
 
 @interface JCHeartRateMonitor : NSObject
 
-@property (nonatomic, strong, readonly) NSArray *bluetoothServices;
++ (NSArray *)bluetoothServices;
 
 @property (nonatomic, strong, readonly) NSString *manufacturerName; //this may not be available right away
 @property (nonatomic, strong, readonly) NSUUID *identifier;
 
 @property (nonatomic, weak) id<JCHeartRateMonitorDelegate> delegate;
+
+- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral;
+
 @end

@@ -23,6 +23,11 @@
 		88D8804A186B91F200EA1D4D /* HeartRateMonitorTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D88049186B91F200EA1D4D /* HeartRateMonitorTests.m */; };
 		88D88056186BADD500EA1D4D /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88055186BADD500EA1D4D /* CoreBluetooth.framework */; };
 		88D88058186BADDE00EA1D4D /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88057186BADDE00EA1D4D /* QuartzCore.framework */; };
+		88D8805D186BD37700EA1D4D /* JCHeartRateMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D8805C186BD37700EA1D4D /* JCHeartRateMeasurement.m */; };
+		88D88060186BD4DB00EA1D4D /* JCHeartRateMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D8805F186BD4DB00EA1D4D /* JCHeartRateMonitor.m */; };
+		88D88063186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D88062186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m */; };
+		88D88066186BDE0900EA1D4D /* JCBluetoothPeripheral.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D88065186BDE0900EA1D4D /* JCBluetoothPeripheral.m */; };
+		88D8806A186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 88D88069186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +63,18 @@
 		88D88053186B920100EA1D4D /* README.mdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = README.mdown; path = ../README.mdown; sourceTree = "<group>"; };
 		88D88055186BADD500EA1D4D /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		88D88057186BADDE00EA1D4D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		88D8805A186BD33400EA1D4D /* JCHeartRateMonitorDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHeartRateMonitorDelegate.h; sourceTree = "<group>"; };
+		88D8805B186BD37700EA1D4D /* JCHeartRateMeasurement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHeartRateMeasurement.h; sourceTree = "<group>"; };
+		88D8805C186BD37700EA1D4D /* JCHeartRateMeasurement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCHeartRateMeasurement.m; sourceTree = "<group>"; };
+		88D8805E186BD4DB00EA1D4D /* JCHeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHeartRateMonitor.h; sourceTree = "<group>"; };
+		88D8805F186BD4DB00EA1D4D /* JCHeartRateMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCHeartRateMonitor.m; sourceTree = "<group>"; };
+		88D88061186BDC3A00EA1D4D /* JCHeartRateDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHeartRateDeviceManager.h; sourceTree = "<group>"; };
+		88D88062186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCHeartRateDeviceManager.m; sourceTree = "<group>"; };
+		88D88064186BDE0900EA1D4D /* JCBluetoothPeripheral.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCBluetoothPeripheral.h; sourceTree = "<group>"; };
+		88D88065186BDE0900EA1D4D /* JCBluetoothPeripheral.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCBluetoothPeripheral.m; sourceTree = "<group>"; };
+		88D88067186BDFB700EA1D4D /* JCHeartDateDeviceManagerDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JCHeartDateDeviceManagerDelegate.h; sourceTree = "<group>"; };
+		88D88068186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCBluetoothPeripheralsViewController.h; sourceTree = "<group>"; };
+		88D88069186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCBluetoothPeripheralsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,7 +109,6 @@
 				88D88053186B920100EA1D4D /* README.mdown */,
 				88D88024186B91F200EA1D4D /* HeartRateMonitor */,
 				88D88043186B91F200EA1D4D /* HeartRateMonitorTests */,
-				88D8801D186B91F200EA1D4D /* Frameworks */,
 				88D8801C186B91F200EA1D4D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -117,17 +133,22 @@
 				88D8803D186B91F200EA1D4D /* XCTest.framework */,
 			);
 			name = Frameworks;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		88D88024186B91F200EA1D4D /* HeartRateMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				88D88059186BD31C00EA1D4D /* Model */,
 				88D8802D186B91F200EA1D4D /* JCAppDelegate.h */,
 				88D8802E186B91F200EA1D4D /* JCAppDelegate.m */,
 				88D88030186B91F200EA1D4D /* Main.storyboard */,
+				88D88068186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.h */,
+				88D88069186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m */,
 				88D88033186B91F200EA1D4D /* JCViewController.h */,
 				88D88034186B91F200EA1D4D /* JCViewController.m */,
 				88D88036186B91F200EA1D4D /* Images.xcassets */,
+				88D8801D186B91F200EA1D4D /* Frameworks */,
 				88D88025186B91F200EA1D4D /* Supporting Files */,
 			);
 			path = HeartRateMonitor;
@@ -160,6 +181,23 @@
 				88D88046186B91F200EA1D4D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		88D88059186BD31C00EA1D4D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				88D8805A186BD33400EA1D4D /* JCHeartRateMonitorDelegate.h */,
+				88D8805B186BD37700EA1D4D /* JCHeartRateMeasurement.h */,
+				88D8805C186BD37700EA1D4D /* JCHeartRateMeasurement.m */,
+				88D8805E186BD4DB00EA1D4D /* JCHeartRateMonitor.h */,
+				88D8805F186BD4DB00EA1D4D /* JCHeartRateMonitor.m */,
+				88D88067186BDFB700EA1D4D /* JCHeartDateDeviceManagerDelegate.h */,
+				88D88061186BDC3A00EA1D4D /* JCHeartRateDeviceManager.h */,
+				88D88062186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m */,
+				88D88064186BDE0900EA1D4D /* JCBluetoothPeripheral.h */,
+				88D88065186BDE0900EA1D4D /* JCBluetoothPeripheral.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -260,8 +298,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D88066186BDE0900EA1D4D /* JCBluetoothPeripheral.m in Sources */,
 				88D8802B186B91F200EA1D4D /* main.m in Sources */,
+				88D8806A186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m in Sources */,
+				88D88060186BD4DB00EA1D4D /* JCHeartRateMonitor.m in Sources */,
 				88D88035186B91F200EA1D4D /* JCViewController.m in Sources */,
+				88D88063186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m in Sources */,
+				88D8805D186BD37700EA1D4D /* JCHeartRateMeasurement.m in Sources */,
 				88D8802F186B91F200EA1D4D /* JCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

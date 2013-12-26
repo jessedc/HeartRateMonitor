@@ -44,7 +44,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
     JCBTHRIntervalValuesPresent = 0x1
 };
 
-@interface JCHeartRateMonitor() <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface JCHeartRateMonitor() <CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
 
@@ -67,21 +67,28 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 @implementation JCHeartRateMonitor
 @dynamic identifier;
 
-- (id)init
++ (NSArray *)bluetoothServices
+{
+    static dispatch_once_t onceToken;
+    static NSArray *bluetoothServices;
+    dispatch_once(&onceToken, ^{
+        bluetoothServices = @[[CBUUID UUIDWithString:HRM_HEAT_RATE_SERVICE], [CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE]];
+    });
+    return bluetoothServices;
+}
+
+- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
 {
     if (self = [super init])
     {
-        self.heartRateService = [CBUUID UUIDWithString:HRM_HEAT_RATE_SERVICE];
-        self.deviceInfoService = [CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE];
-
         self.heartRateMeasurementCharacteristic = [CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC];
         self.manufacturerNameCharacteristic = [CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC];
         self.bodyLocationCharacteristic = [CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC];
 
-        self.bluetoothServices = @[self.heartRateService, self.deviceInfoService];
+//        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
 
-        self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
-        [self.centralManager scanForPeripheralsWithServices:self.bluetoothServices options:nil];
+        self.heartRatePeripheral = peripheral;
+        self.heartRatePeripheral.delegate = self;
     }
     return self;
 }
@@ -95,76 +102,38 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
 #pragma mark - CBCentralManagerDelegate
 
-- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
-{
-    NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
-    NSLog(@"Discovered the peripheral with name: %@", localName);
+//- (void)centralManager:(CBCentralManager *)central didDiscoverPeripheral:(CBPeripheral *)peripheral advertisementData:(NSDictionary *)advertisementData RSSI:(NSNumber *)RSSI
+//{
+//    NSString *localName = [advertisementData objectForKey:CBAdvertisementDataLocalNameKey];
+//    NSLog(@"Discovered the peripheral with name: %@", localName);
+//
+//    //FIXME: JC - Why check for a length?
+//    if (localName.length > 0)
+//    {
+//        [self.centralManager stopScan];
+//        self.heartRatePeripheral = peripheral;
+//
+//        self.heartRatePeripheral.delegate = self;
+//        [self.centralManager connectPeripheral:peripheral options:nil];
+//    }
+//}
 
-    //FIXME: JC - Why check for a length?
-    if (localName.length > 0)
-    {
-        [self.centralManager stopScan];
-        self.heartRatePeripheral = peripheral;
+//- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
+//{
+//    NSAssert(peripheral == self.heartRatePeripheral, @"expecting these to be the same object");
+//
+//    [self.heartRatePeripheral discoverServices:self.bluetoothServices];
+//
+//    //TODO: Connected Case
+////    self.connected = [NSString stringWithFormat:@"connected: %@", peripheral.state == CBPeripheralStateConnected ? @"YES" : @"NO"];
+////    NSLog(@"%@", self.connected);
+//}
 
-        self.heartRatePeripheral.delegate = self;
-        [self.centralManager connectPeripheral:peripheral options:nil];
-    }
-}
-
-- (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral
-{
-    NSAssert(peripheral == self.heartRatePeripheral, @"expecting these to be the same object");
-
-    [self.heartRatePeripheral discoverServices:self.bluetoothServices];
-
-    //TODO: Connected Case
-//    self.connected = [NSString stringWithFormat:@"connected: %@", peripheral.state == CBPeripheralStateConnected ? @"YES" : @"NO"];
-//    NSLog(@"%@", self.connected);
-}
-
-- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
-{
-    //TODO: Error case
-    NSLog(@"did fail to connect");
-}
-
-- (void)centralManagerDidUpdateState:(CBCentralManager *)central
-{
-    switch (central.state)
-    {
-        case CBCentralManagerStatePoweredOff:
-        {
-            NSLog(@"CoreBluetooth didUpdateState: hardware is powered off.");
-            break;
-        }
-        case CBCentralManagerStatePoweredOn:
-        {
-            NSLog(@"CoreBluetooth didUpdateState: hardware is powered on.");
-            break;
-        }
-        case CBCentralManagerStateUnauthorized:
-        {
-            NSLog(@"CoreBluetooth didUpdateState: unauthorized.");
-            break;
-        }
-        case CBCentralManagerStateResetting:
-        {
-            NSLog(@"CoreBluetooth didUpdateState: hardware is resetting.");
-            break;
-        }
-        case CBCentralManagerStateUnsupported:
-        {
-            NSLog(@"CoreBluetooth didUpdateState: hardware is unsupported.");
-            break;
-        }
-        default:
-        case CBCentralManagerStateUnknown:
-        {
-            NSLog(@"CoreBluetooth didUpdateState: state is unknown.");
-            break;
-        }
-    }
-}
+//- (void)centralManager:(CBCentralManager *)central didFailToConnectPeripheral:(CBPeripheral *)peripheral error:(NSError *)error
+//{
+//    //TODO: Error case
+//    NSLog(@"did fail to connect");
+//}
 
 #pragma mark - CBPeripheralDelegate
 
