@@ -8,6 +8,12 @@
 
 #import "JCViewController.h"
 
+//FIXME: Remove this
+
+#import "JCHeartRateMeasurement.h"
+#import "JCHeartRateMonitorDelegate.h"
+
+
 // https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx
 
 #define HRM_DEVICE_INFO_SERVICE @"180A" //org.bluetooth.service.device_information
@@ -44,7 +50,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
     JCBTHRIntervalValuesPresent = 0x1
 };
 
-@interface JCViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
+@interface JCViewController () <CBCentralManagerDelegate, CBPeripheralDelegate, JCHeartRateMonitorDelegate>
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
 @property (nonatomic, strong) CBPeripheral *blueHRPeripheral;
@@ -75,6 +81,13 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
+}
+
+#pragma mark - JCHeartRateMonitorDelegate
+
+- (void)monitor:(JCHeartRateMonitor *)monitor didReceiveHeartRateMeasurement:(JCHeartRateMeasurement *)measurement
+{
+    self.heartRateBPM.text = [NSString stringWithFormat:@"HR: %i BPM", [measurement.beatsPerMinute intValue]];
 }
 
 #pragma mark - Characteristic Getter Instance Methods
@@ -117,8 +130,11 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
     if ((characteristic.value) || !error)
     {
-        self.heartRate = bpm;
-        self.heartRateBPM.text = [NSString stringWithFormat:@"HR: %i BPM", bpm];
+        JCHeartRateMeasurement *measurement = [[JCHeartRateMeasurement alloc] init];
+        measurement.beatsPerMinute = @(bpm);
+        measurement.timestamp = [NSDate date];
+
+        [self monitor:nil didReceiveHeartRateMeasurement:measurement];
     }
 }
 
