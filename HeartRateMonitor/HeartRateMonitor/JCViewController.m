@@ -210,6 +210,8 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 {
     for (CBService *service in peripheral.services)
     {
+        NSLog(@"found service: %@", service.UUID);
+
         NSArray *chars;
         if ([service.UUID isEqual:[CBUUID UUIDWithString:HRM_DEVICE_INFO_SERVICE]])
         {
