@@ -19,6 +19,31 @@
 #define HRM_BODY_LOCATION_CHARACTERISTIC @"2A38" //org.bluetooth.characteristic.blood_pressure_measurement
 #define HRM_MANUFACTURER_NAME_CHARACTERISTIC @"2A29" //org.bluetooth.characteristic.manufacturer_name_string
 
+NS_ENUM(uint8_t, JCBTHRFormat)
+{
+    JCBTHRFormat8Bit = 0x0,
+    JCBTHRFormat16Bit = 0x1
+};
+
+NS_ENUM(uint8_t, JCBTHRSensorContactStatus)
+{
+    JCBTHRSensorContactStatusNotSupported = 0x0,
+    JCBTHRSensorContactStatusSupportedNotDetected = 0x2,
+    JCBTHRSensorContactStatusSupportedDetected = 0x3
+};
+
+NS_ENUM(uint8_t, JCBTHREnergyExpendedStatus)
+{
+    JCBTHREnergyExpendedStatusNotSupported = 0x0,
+    JCBTHREnergyExpendedStatusFieldPresent = 0x1
+};
+
+NS_ENUM(uint8_t, JCBTHRIntervalValues)
+{
+    JCBTHRIntervalValuesNotPresent = 0x0,
+    JCBTHRIntervalValuesPresent = 0x1
+};
+
 @interface JCViewController () <CBCentralManagerDelegate, CBPeripheralDelegate>
 
 @property (nonatomic, strong) CBCentralManager *centralManager;
@@ -62,9 +87,24 @@
     //https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml
     // [8bit-flags [0-format][12-contact-status][3-energry][4-interval][567-NaN][8bit-integer]
     const uint8_t *reportData = [data bytes];
-    uint16_t bpm = 0;
+    uint8_t flags = reportData[0];
 
-    if ((reportData[0] & 0x01) == 0) //Format is set to UINT8
+    enum JCBTHRFormat bpmFormat = (flags & 0x1);
+
+    flags = flags << 1;
+
+    __unused enum JCBTHRSensorContactStatus contactStatus = (flags & 0x3); //has a length of two
+
+    flags = flags << 2;
+
+    __unused enum JCBTHREnergyExpendedStatus energyExpendedStauts = (flags & 0x1);
+
+    flags = flags << 1;
+
+    __unused enum JCBTHRIntervalValues intervalValues = (flags & 0x1);
+
+    uint16_t bpm = 0;
+    if (bpmFormat == JCBTHRFormat8Bit) //Format is set to UINT8
     {
         bpm = reportData[1]; //grab the second byte directly, put it in the bigger container bpm
     }
@@ -84,12 +124,13 @@
 
 - (void)getManufacturerName:(CBCharacteristic *)characteristic
 {
-
+    NSString *name = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+    self.manufacturer = [NSString stringWithFormat:@"Manufacturer: %@", name];
 }
 
 - (void)getBodyLocation:(CBCharacteristic *)characteristic
 {
-
+    //TODO: https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.body_sensor_location.xml
 }
 
 #pragma mark - CBCentralManagerDelegate
@@ -234,7 +275,7 @@
         [self getBodyLocation:characteristic];
     }
 
-    self.deviceInfo.text = [NSString stringWithFormat:@"%@\n%@\n%@\n", self.connected, self.bodyData, self.manufacturer];
+    self.deviceInfo.text = [NSString stringWithFormat:@"%@\n%@\n", self.connected, self.manufacturer];
 }
 
 @end

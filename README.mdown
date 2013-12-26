@@ -22,6 +22,7 @@ An investigation into Blutetooth LE by Jesse Collis
 - [Bluetooth LE Services Reference](https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx)
 - [Bluetooth LE Characteristics Reference](https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicsHome.aspx)
 - [Hear Rate Measurement characteristic](https://developer.bluetooth.org/gatt/characteristics/Pages/CharacteristicViewer.aspx?u=org.bluetooth.characteristic.heart_rate_measurement.xml)
+
 ### Calorie Calculations
 
 http://fitness.stackexchange.com/questions/12435/is-it-possible-to-measure-calorie-burn-from-heart-rate-alonev
