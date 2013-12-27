@@ -10,6 +10,8 @@
 #import "JCHeartRateDeviceManager.h"
 #import "JCViewController.h"
 
+#import "JCAppDelegate.h"
+
 @interface JCBluetoothPeripheralsViewController () <JCHeartDateDeviceManagerDelegate>
 @property (nonatomic, strong) JCHeartRateDeviceManager *deviceManager;
 @end
@@ -20,7 +22,11 @@
 {
     [super viewDidLoad];
 
-    self.deviceManager = [[JCHeartRateDeviceManager alloc] init];
+    //FIXME: configureWithDeviceManager
+
+    JCAppDelegate *appDelegate = (JCAppDelegate *)UIApplication.sharedApplication.delegate;
+
+    self.deviceManager = [[JCHeartRateDeviceManager alloc] initWithManagedObjectContext:appDelegate.coreDataManager.moc];
     self.deviceManager.delegate = self;
 
     [self.deviceManager addObserver:self forKeyPath:@"peripherals" options:NSKeyValueObservingOptionInitial|NSKeyValueObservingOptionNew context:nil];

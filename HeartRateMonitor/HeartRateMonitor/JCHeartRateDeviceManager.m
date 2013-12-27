@@ -12,14 +12,16 @@
 
 @interface JCHeartRateDeviceManager() <CBCentralManagerDelegate>
 @property (nonatomic, strong) CBCentralManager *centralManager;
+@property (nonatomic, strong) NSManagedObjectContext *moc;
 @end
 
 @implementation JCHeartRateDeviceManager
 
-- (id)init
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)moc
 {
     if (self = [super init])
     {
+        self.moc = moc;
         self.peripherals = @[];
         self.centralManager = [[CBCentralManager alloc] initWithDelegate:self queue:nil];
     }

@@ -18,6 +18,8 @@
 
 @property (nonatomic, strong) NSArray *peripherals; //you should be able to observe this
 
+- (id)initWithManagedObjectContext:(NSManagedObjectContext *)moc;
+
 - (void)startScanning;
 - (void)stopScanning;
 

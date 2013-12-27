@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "JCCoreDataManager.h"
 
 @interface JCAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (nonatomic, strong) JCCoreDataManager *coreDataManager;
 
 @end

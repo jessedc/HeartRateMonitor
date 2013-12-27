@@ -8,11 +8,15 @@
 
 #import "JCAppDelegate.h"
 
+@interface JCAppDelegate()
+@end
+
 @implementation JCAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    self.coreDataManager = [[JCCoreDataManager alloc] init];
+
     return YES;
 }
 							
