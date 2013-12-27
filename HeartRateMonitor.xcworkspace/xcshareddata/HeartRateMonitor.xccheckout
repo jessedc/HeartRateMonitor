@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D02F25FE-AA5E-4792-BE84-218177C3428D</string>
+	<key>IDESourceControlProjectName</key>
+	<string>HeartRateMonitor</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>06F3C311-7AE3-4DE0-8A37-33F5A6B030B2</key>
+		<string>ssh://github.com/jessedc/HeartRateMonitor.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>HeartRateMonitor.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>06F3C311-7AE3-4DE0-8A37-33F5A6B030B2</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/jessedc/HeartRateMonitor.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>06F3C311-7AE3-4DE0-8A37-33F5A6B030B2</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>06F3C311-7AE3-4DE0-8A37-33F5A6B030B2</string>
+			<key>IDESourceControlWCCName</key>
+			<string>HeartRateMonitor</string>
+		</dict>
+	</array>
+</dict>
+</plist>
