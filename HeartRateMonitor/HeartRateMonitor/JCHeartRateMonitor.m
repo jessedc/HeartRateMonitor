@@ -54,12 +54,18 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 @property (nonatomic, strong) CBPeripheral *heartRatePeripheral;
 
 @property (nonatomic, strong, readwrite) NSArray *bluetoothServices;
-@property (nonatomic, strong, readwrite) NSString *manufacturerName;
 
 @end
 
 @implementation JCHeartRateMonitor
 @dynamic identifier;
+@synthesize heartRateMeasurementCharacteristic;
+@synthesize bodyLocationCharacteristic;
+@synthesize manufacturerNameCharacteristic;
+@synthesize heartRatePeripheral;
+@synthesize bluetoothServices;
+@synthesize delegate;
+
 
 + (NSArray *)bluetoothServices
 {

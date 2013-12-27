@@ -6,11 +6,8 @@
 //  Copyright (c) 2013 JCMultimedia. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "_JCHeartRateMeasurement.h"
 
-@interface JCHeartRateMeasurement : NSObject
-
-@property (nonatomic, strong) NSNumber *beatsPerMinute;
-@property (nonatomic, strong) NSDate *timestamp;
+@interface JCHeartRateMeasurement : _JCHeartRateMeasurement
 
 @end
