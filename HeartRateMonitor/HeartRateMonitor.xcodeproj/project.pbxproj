@@ -11,6 +11,8 @@
 		883F7F7C186D3E68001B193C /* _JCHeartRateMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F79186D3E68001B193C /* _JCHeartRateMeasurement.m */; };
 		883F7F7D186D3E68001B193C /* _JCHeartRateMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F7B186D3E68001B193C /* _JCHeartRateMonitor.m */; };
 		883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */; };
+		883F7F85186D5751001B193C /* CBPeripheral+HeartRateAccessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F84186D5751001B193C /* CBPeripheral+HeartRateAccessors.m */; };
+		883F7F88186D586E001B193C /* CBService+HeartRateAccessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F87186D586E001B193C /* CBService+HeartRateAccessors.m */; };
 		88D8801F186B91F200EA1D4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D8801E186B91F200EA1D4D /* Foundation.framework */; };
 		88D88021186B91F200EA1D4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88020186B91F200EA1D4D /* CoreGraphics.framework */; };
 		88D88023186B91F200EA1D4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88022186B91F200EA1D4D /* UIKit.framework */; };
@@ -54,6 +56,10 @@
 		883F7F7B186D3E68001B193C /* _JCHeartRateMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _JCHeartRateMonitor.m; sourceTree = "<group>"; };
 		883F7F7F186D4BF2001B193C /* JCHeartRateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHeartRateTableViewController.h; sourceTree = "<group>"; };
 		883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCHeartRateTableViewController.m; sourceTree = "<group>"; };
+		883F7F83186D5751001B193C /* CBPeripheral+HeartRateAccessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBPeripheral+HeartRateAccessors.h"; sourceTree = "<group>"; };
+		883F7F84186D5751001B193C /* CBPeripheral+HeartRateAccessors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+HeartRateAccessors.m"; sourceTree = "<group>"; };
+		883F7F86186D586E001B193C /* CBService+HeartRateAccessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBService+HeartRateAccessors.h"; sourceTree = "<group>"; };
+		883F7F87186D586E001B193C /* CBService+HeartRateAccessors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBService+HeartRateAccessors.m"; sourceTree = "<group>"; };
 		88D8801B186B91F200EA1D4D /* HeartRateMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D8801E186B91F200EA1D4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		88D88020186B91F200EA1D4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -131,6 +137,17 @@
 			name = mogenerated;
 			sourceTree = "<group>";
 		};
+		883F7F82186D5729001B193C /* CoreBluetooth Additions */ = {
+			isa = PBXGroup;
+			children = (
+				883F7F83186D5751001B193C /* CBPeripheral+HeartRateAccessors.h */,
+				883F7F84186D5751001B193C /* CBPeripheral+HeartRateAccessors.m */,
+				883F7F86186D586E001B193C /* CBService+HeartRateAccessors.h */,
+				883F7F87186D586E001B193C /* CBService+HeartRateAccessors.m */,
+			);
+			name = "CoreBluetooth Additions";
+			sourceTree = "<group>";
+		};
 		88D88012186B91F200EA1D4D = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +185,7 @@
 		88D88024186B91F200EA1D4D /* HeartRateMonitor */ = {
 			isa = PBXGroup;
 			children = (
+				883F7F82186D5729001B193C /* CoreBluetooth Additions */,
 				88F94F1D186D287600E7D741 /* CoreData */,
 				88D88059186BD31C00EA1D4D /* Model */,
 				88D8802D186B91F200EA1D4D /* JCAppDelegate.h */,
@@ -349,6 +367,8 @@
 				88D88060186BD4DB00EA1D4D /* JCHeartRateMonitor.m in Sources */,
 				883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */,
 				88D88035186B91F200EA1D4D /* JCViewController.m in Sources */,
+				883F7F85186D5751001B193C /* CBPeripheral+HeartRateAccessors.m in Sources */,
+				883F7F88186D586E001B193C /* CBService+HeartRateAccessors.m in Sources */,
 				88D88063186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m in Sources */,
 				88F94F20186D288500E7D741 /* JCCoreDataManager.m in Sources */,
 				88D8805D186BD37700EA1D4D /* JCHeartRateMeasurement.m in Sources */,

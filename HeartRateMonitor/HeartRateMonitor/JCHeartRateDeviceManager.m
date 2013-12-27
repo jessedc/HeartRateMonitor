@@ -93,10 +93,12 @@
     p.advertisementData = advertisementData;
     p.RSSI = RSSI;
 
-    if (![mutablePeripherals containsObject:p])
+    if ([mutablePeripherals containsObject:p])
     {
-        [mutablePeripherals addObject:p];
+        [mutablePeripherals removeObject:p];
     }
+
+    [mutablePeripherals addObject:p];
 }
 
 - (void)centralManager:(CBCentralManager *)central didConnectPeripheral:(CBPeripheral *)peripheral

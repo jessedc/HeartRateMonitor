@@ -10,6 +10,23 @@
 
 @implementation JCBluetoothPeripheral
 
-//TODO: isEqual
+#pragma mark - NSObject
+
+- (BOOL)isEqual:(id)object
+{
+    if (object == self) return YES;
+
+    if ([object isKindOfClass:[self class]])
+    {
+        return ([self.peripheral.identifier isEqual:[(JCBluetoothPeripheral *)object peripheral].identifier]);
+    }
+
+    return NO;
+}
+
+- (NSUInteger)hash
+{
+    return [self.peripheral.identifier hash];
+}
 
 @end

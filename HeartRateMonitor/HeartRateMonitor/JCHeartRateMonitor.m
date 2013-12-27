@@ -7,6 +7,8 @@
 //
 
 #import "JCHeartRateMonitor.h"
+#import "CBPeripheral+HeartRateAccessors.h"
+#import "CBService+HeartRateAccessors.h"
 
 // https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx
 
@@ -18,6 +20,8 @@
 #define HRM_MEASUREMENT_CHARACTERISTIC @"2A37" //org.bluetooth.characteristic.heart_rate_measurement
 #define HRM_BODY_LOCATION_CHARACTERISTIC @"2A38" //org.bluetooth.characteristic.blood_pressure_measurement
 #define HRM_MANUFACTURER_NAME_CHARACTERISTIC @"2A29" //org.bluetooth.characteristic.manufacturer_name_string
+
+#define HRM_BATTERY_LEVEL_CHARACTERISTIC @"2A19"
 
 NS_ENUM(uint8_t, JCBTHRFormat)
 {
@@ -52,6 +56,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 @property (nonatomic, strong) CBUUID *manufacturerNameCharacteristic;
 
 @property (nonatomic, strong) CBPeripheral *heartRatePeripheral;
+@property (nonatomic, assign) BOOL beginUpdatingHeartRateOnDiscovery;
 
 @end
 
@@ -62,6 +67,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 @synthesize manufacturerNameCharacteristic;
 @synthesize heartRatePeripheral;
 @synthesize delegate;
+@synthesize beginUpdatingHeartRateOnDiscovery;
 
 + (NSArray *)bluetoothServices
 {
@@ -82,19 +88,29 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
     self.heartRatePeripheral = peripheral;
     self.heartRatePeripheral.delegate = self;
-    [self.heartRatePeripheral discoverServices:[[self class] bluetoothServices]];
+    [self.heartRatePeripheral discoverServices:nil];
 
     self.identifier = [peripheral.identifier UUIDString];
 }
 
 - (void)startUpdatingHeartRate
 {
-
+    self.beginUpdatingHeartRateOnDiscovery = YES;
+//    CBCharacteristic *measurementChar = [[self.heartRatePeripheral heartRateMonitorService] heartRateMeasurementCharacteristic];
+//    if (measurementChar)
+//    {
+//        [self.heartRatePeripheral setNotifyValue:YES forCharacteristic:measurementChar];
+//    }
 }
 
 - (void)stopUpdatingHeartRate
 {
-    
+    self.beginUpdatingHeartRateOnDiscovery = NO;
+//    CBCharacteristic *measurementChar = [[self.heartRatePeripheral heartRateMonitorService] heartRateMeasurementCharacteristic];
+//    if (measurementChar)
+//    {
+//        [self.heartRatePeripheral setNotifyValue:NO forCharacteristic:measurementChar];
+//    }
 }
 
 #pragma mark - CBPeripheralDelegate
@@ -108,7 +124,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
         NSArray *chars;
         if ([service.UUID isEqual:[[self class] bluetoothServices][1]])
         {
-            chars = @[self.manufacturerNameCharacteristic];
+            chars = @[self.manufacturerNameCharacteristic, [CBUUID UUIDWithString:HRM_BATTERY_LEVEL_CHARACTERISTIC]];
 
         }
         else if ([service.UUID isEqual:[[self class] bluetoothServices][0]])
@@ -124,11 +140,17 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 {
     for (CBCharacteristic *aChar in service.characteristics)
     {
+        NSLog(@"found characteristic: %@", aChar.UUID);
+
         if ([aChar.UUID isEqual:self.heartRateMeasurementCharacteristic])
         {
             [peripheral setNotifyValue:YES forCharacteristic:aChar];
         }
         else if ([aChar.UUID isEqual:self.manufacturerNameCharacteristic])
+        {
+            [peripheral readValueForCharacteristic:aChar];
+        }
+        else if ([aChar.UUID isEqual:[CBUUID UUIDWithString:HRM_BATTERY_LEVEL_CHARACTERISTIC]])
         {
             [peripheral readValueForCharacteristic:aChar];
         }
@@ -145,6 +167,11 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
     {
         [self getManufacturerName:characteristic];
     }
+    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_BATTERY_LEVEL_CHARACTERISTIC]])
+    {
+        [self getBatteryLevel:characteristic];
+    }
+
     //TODO: if I care, subscribe to this
 //    else if ([characteristic.UUID isEqual:[CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC]])
 //    {
@@ -203,6 +230,14 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 - (void)getManufacturerName:(CBCharacteristic *)characteristic
 {
     self.manufacturerName = [[NSString alloc] initWithData:characteristic.value encoding:NSUTF8StringEncoding];
+}
+
+- (void)getBatteryLevel:(CBCharacteristic *)characteristic
+{
+    NSData *data = characteristic.value;
+    const uint8_t *reportData = [data bytes];
+
+    NSLog(@"GOT BATTERY: %@", @(reportData[0]));
 }
 
 //- (void)getBodyLocation:(CBCharacteristic *)characteristic
