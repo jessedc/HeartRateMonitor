@@ -25,7 +25,7 @@
 
 - (void)setupCoreDataStack
 {
-    NSURL *momURL = [[self class] modelURL];
+    NSURL *momURL = [self modelURL];
     NSManagedObjectModel *mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];
     NSPersistentStoreCoordinator *psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:mom];
 
