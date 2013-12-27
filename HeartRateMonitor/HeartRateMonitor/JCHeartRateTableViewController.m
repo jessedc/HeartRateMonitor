@@ -7,7 +7,6 @@
 //
 
 #import "JCHeartRateTableViewController.h"
-//#import "JCAppDelegate.h"
 #import "JCHeartRateMonitor.h"
 
 @interface JCHeartRateTableViewController () <NSFetchedResultsControllerDelegate, JCHeartRateMonitorDelegate>
