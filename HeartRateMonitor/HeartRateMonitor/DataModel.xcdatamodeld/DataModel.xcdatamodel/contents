@@ -3,12 +3,12 @@
     <entity name="HeartRateMeasurement" representedClassName="JCHeartRateMeasurement" syncable="YES">
         <attribute name="beatsPerMinute" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="peripheral" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeartRateMonitor" inverseName="measurements" inverseEntity="HeartRateMonitor" syncable="YES"/>
+        <relationship name="heartRateMonitor" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="HeartRateMonitor" inverseName="measurements" inverseEntity="HeartRateMonitor" syncable="YES"/>
     </entity>
     <entity name="HeartRateMonitor" representedClassName="JCHeartRateMonitor" syncable="YES">
         <attribute name="identifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="manufacturerName" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="measurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HeartRateMeasurement" inverseName="peripheral" inverseEntity="HeartRateMeasurement" syncable="YES"/>
+        <relationship name="measurements" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="HeartRateMeasurement" inverseName="heartRateMonitor" inverseEntity="HeartRateMeasurement" syncable="YES"/>
     </entity>
     <elements>
         <element name="HeartRateMonitor" positionX="0" positionY="0" width="0" height="0"/>

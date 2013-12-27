@@ -13,7 +13,7 @@ extern const struct JCHeartRateMeasurementAttributes {
 
 
 extern const struct JCHeartRateMeasurementRelationships {
-	__unsafe_unretained NSString *peripheral;
+	__unsafe_unretained NSString *heartRateMonitor;
 } JCHeartRateMeasurementRelationships;
 
 
@@ -67,9 +67,9 @@ extern const struct JCHeartRateMeasurementRelationships {
 
 
 
-@property (nonatomic, strong) JCHeartRateMonitor *peripheral;
+@property (nonatomic, strong) JCHeartRateMonitor *heartRateMonitor;
 
-//- (BOOL)validatePeripheral:(id*)value_ error:(NSError**)error_;
+//- (BOOL)validateHeartRateMonitor:(id*)value_ error:(NSError**)error_;
 
 
 
@@ -98,8 +98,8 @@ extern const struct JCHeartRateMeasurementRelationships {
 
 
 
-- (JCHeartRateMonitor*)primitivePeripheral;
-- (void)setPrimitivePeripheral:(JCHeartRateMonitor*)value;
+- (JCHeartRateMonitor*)primitiveHeartRateMonitor;
+- (void)setPrimitiveHeartRateMonitor:(JCHeartRateMonitor*)value;
 
 
 @end

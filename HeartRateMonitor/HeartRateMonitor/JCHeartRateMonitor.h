@@ -17,6 +17,9 @@
 
 @property (nonatomic, weak) id<JCHeartRateMonitorDelegate> delegate;
 
-- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral;
+- (void)configureWithPeripheral:(CBPeripheral *)peripheral;
+
+- (void)startUpdatingHeartRate;
+- (void)stopUpdatingHeartRate;
 
 @end

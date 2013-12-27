@@ -8,8 +8,7 @@
 
 #import "JCBluetoothPeripheralsViewController.h"
 #import "JCHeartRateDeviceManager.h"
-#import "JCViewController.h"
-
+#import "JCHeartRateTableViewController.h"
 #import "JCAppDelegate.h"
 
 @interface JCBluetoothPeripheralsViewController () <JCHeartDateDeviceManagerDelegate>
@@ -108,7 +107,7 @@
 
 - (void)manager:(JCHeartRateDeviceManager *)manager didConnectHeartRateMonitor:(JCHeartRateMonitor *)monitor
 {
-    JCViewController *heartRateController = [self.storyboard instantiateViewControllerWithIdentifier:@"HeartRateController"];
+    JCHeartRateTableViewController *heartRateController = [self.storyboard instantiateViewControllerWithIdentifier:@"HeartRateTable"];
     [heartRateController configureWithHeartRateMonitor:monitor];
 
     [self.navigationController pushViewController:heartRateController animated:YES];

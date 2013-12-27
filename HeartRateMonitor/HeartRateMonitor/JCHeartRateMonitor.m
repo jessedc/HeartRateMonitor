@@ -53,8 +53,6 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
 @property (nonatomic, strong) CBPeripheral *heartRatePeripheral;
 
-@property (nonatomic, strong, readwrite) NSArray *bluetoothServices;
-
 @end
 
 @implementation JCHeartRateMonitor
@@ -63,9 +61,7 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 @synthesize bodyLocationCharacteristic;
 @synthesize manufacturerNameCharacteristic;
 @synthesize heartRatePeripheral;
-@synthesize bluetoothServices;
 @synthesize delegate;
-
 
 + (NSArray *)bluetoothServices
 {
@@ -77,26 +73,28 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
     return bluetoothServices;
 }
 
-- (instancetype)initWithPeripheral:(CBPeripheral *)peripheral
+- (void)configureWithPeripheral:(CBPeripheral *)peripheral
 {
-    if (self = [super init])
-    {
-        self.heartRateMeasurementCharacteristic = [CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC];
-        self.manufacturerNameCharacteristic = [CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC];
-        self.bodyLocationCharacteristic = [CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC];
+    //FIXME: make these static
+    self.heartRateMeasurementCharacteristic = [CBUUID UUIDWithString:HRM_MEASUREMENT_CHARACTERISTIC];
+    self.manufacturerNameCharacteristic = [CBUUID UUIDWithString:HRM_MANUFACTURER_NAME_CHARACTERISTIC];
+    self.bodyLocationCharacteristic = [CBUUID UUIDWithString:HRM_BODY_LOCATION_CHARACTERISTIC];
 
-        self.heartRatePeripheral = peripheral;
-        self.heartRatePeripheral.delegate = self;
-        [self.heartRatePeripheral discoverServices:self.bluetoothServices];
-    }
-    return self;
+    self.heartRatePeripheral = peripheral;
+    self.heartRatePeripheral.delegate = self;
+    [self.heartRatePeripheral discoverServices:[[self class] bluetoothServices]];
+
+    self.identifier = [peripheral.identifier UUIDString];
 }
 
-#pragma mark - Properties
-
-- (NSUUID *)identifier
+- (void)startUpdatingHeartRate
 {
-    return self.heartRatePeripheral.identifier;
+
+}
+
+- (void)stopUpdatingHeartRate
+{
+    
 }
 
 #pragma mark - CBPeripheralDelegate
@@ -124,27 +122,15 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
 - (void)peripheral:(CBPeripheral *)peripheral didDiscoverCharacteristicsForService:(CBService *)service error:(NSError *)error
 {
-    //FIXME: JC - I subscribed explicitly to these characteristics. I shouldn't have to check them twice, except for the case
-    // where I want to setNotifyValue instead of readValue;
-
-    if ([service.UUID isEqual:[[self class] bluetoothServices][1]])
+    for (CBCharacteristic *aChar in service.characteristics)
     {
-        for (CBCharacteristic *aChar in service.characteristics)
+        if ([aChar.UUID isEqual:self.heartRateMeasurementCharacteristic])
         {
-            if ([aChar.UUID isEqual:self.manufacturerNameCharacteristic])
-            {
-                [peripheral readValueForCharacteristic:aChar];
-            }
+            [peripheral setNotifyValue:YES forCharacteristic:aChar];
         }
-    }
-    else if ([service.UUID isEqual:[[self class] bluetoothServices][0]])
-    {
-        for (CBCharacteristic *aChar in service.characteristics)
+        else if ([aChar.UUID isEqual:self.manufacturerNameCharacteristic])
         {
-            if ([aChar.UUID isEqual:self.heartRateMeasurementCharacteristic])
-            {
-                [peripheral setNotifyValue:YES forCharacteristic:aChar];
-            }
+            [peripheral readValueForCharacteristic:aChar];
         }
     }
 }
@@ -204,9 +190,10 @@ NS_ENUM(uint8_t, JCBTHRIntervalValues)
 
     if (characteristic.value || !error)
     {
-        JCHeartRateMeasurement *measurement = [[JCHeartRateMeasurement alloc] init];
+        JCHeartRateMeasurement *measurement = [JCHeartRateMeasurement insertInManagedObjectContext:self.managedObjectContext];
         measurement.beatsPerMinute = @(bpm);
         measurement.timestamp = [NSDate date];
+        measurement.heartRateMonitor = self;
 
         typeof (self.delegate) strongDelegate = self.delegate;
         [strongDelegate monitor:self didReceiveHeartRateMeasurement:measurement];

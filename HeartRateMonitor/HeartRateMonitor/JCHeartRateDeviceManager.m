@@ -103,7 +103,9 @@
 {
     if (peripheral.state == CBPeripheralStateConnected)
     {
-        JCHeartRateMonitor *monitor = [[JCHeartRateMonitor alloc] initWithPeripheral:peripheral];
+        JCHeartRateMonitor *monitor = [JCHeartRateMonitor insertInManagedObjectContext:self.moc];
+        [monitor configureWithPeripheral:peripheral];
+
         typeof (self.delegate) strongDelegate = self.delegate;
         [strongDelegate manager:self didConnectHeartRateMonitor:monitor];
     }

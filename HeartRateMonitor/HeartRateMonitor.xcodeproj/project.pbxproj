@@ -10,6 +10,7 @@
 		883F7F77186D3DF1001B193C /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F75186D3DF1001B193C /* DataModel.xcdatamodeld */; };
 		883F7F7C186D3E68001B193C /* _JCHeartRateMeasurement.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F79186D3E68001B193C /* _JCHeartRateMeasurement.m */; };
 		883F7F7D186D3E68001B193C /* _JCHeartRateMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F7B186D3E68001B193C /* _JCHeartRateMonitor.m */; };
+		883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */; };
 		88D8801F186B91F200EA1D4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D8801E186B91F200EA1D4D /* Foundation.framework */; };
 		88D88021186B91F200EA1D4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88020186B91F200EA1D4D /* CoreGraphics.framework */; };
 		88D88023186B91F200EA1D4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88022186B91F200EA1D4D /* UIKit.framework */; };
@@ -51,6 +52,8 @@
 		883F7F79186D3E68001B193C /* _JCHeartRateMeasurement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _JCHeartRateMeasurement.m; sourceTree = "<group>"; };
 		883F7F7A186D3E68001B193C /* _JCHeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = _JCHeartRateMonitor.h; sourceTree = "<group>"; };
 		883F7F7B186D3E68001B193C /* _JCHeartRateMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = _JCHeartRateMonitor.m; sourceTree = "<group>"; };
+		883F7F7F186D4BF2001B193C /* JCHeartRateTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCHeartRateTableViewController.h; sourceTree = "<group>"; };
+		883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCHeartRateTableViewController.m; sourceTree = "<group>"; };
 		88D8801B186B91F200EA1D4D /* HeartRateMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D8801E186B91F200EA1D4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		88D88020186B91F200EA1D4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -178,6 +181,8 @@
 				88D88036186B91F200EA1D4D /* Images.xcassets */,
 				88D8801D186B91F200EA1D4D /* Frameworks */,
 				88D88025186B91F200EA1D4D /* Supporting Files */,
+				883F7F7F186D4BF2001B193C /* JCHeartRateTableViewController.h */,
+				883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */,
 			);
 			path = HeartRateMonitor;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 				88D8806A186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m in Sources */,
 				883F7F7D186D3E68001B193C /* _JCHeartRateMonitor.m in Sources */,
 				88D88060186BD4DB00EA1D4D /* JCHeartRateMonitor.m in Sources */,
+				883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */,
 				88D88035186B91F200EA1D4D /* JCViewController.m in Sources */,
 				88D88063186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m in Sources */,
 				88F94F20186D288500E7D741 /* JCCoreDataManager.m in Sources */,

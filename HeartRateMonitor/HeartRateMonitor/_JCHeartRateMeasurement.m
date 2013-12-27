@@ -12,7 +12,7 @@ const struct JCHeartRateMeasurementAttributes JCHeartRateMeasurementAttributes =
 
 
 const struct JCHeartRateMeasurementRelationships JCHeartRateMeasurementRelationships = {
-	.peripheral = @"peripheral",
+	.heartRateMonitor = @"heartRateMonitor",
 };
 
 
@@ -86,7 +86,6 @@ const struct JCHeartRateMeasurementRelationships JCHeartRateMeasurementRelations
 
 
 
-
 @dynamic timestamp;
 
 
@@ -94,7 +93,7 @@ const struct JCHeartRateMeasurementRelationships JCHeartRateMeasurementRelations
 
 
 
-@dynamic peripheral;
+@dynamic heartRateMonitor;
 
 	
 
