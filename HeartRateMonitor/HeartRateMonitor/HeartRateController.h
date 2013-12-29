@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class JCHeartRateMonitor;
+
 @protocol HeartRateController <NSObject>
 
 - (void)configureWithHeartRateMonitor:(JCHeartRateMonitor *)monitor;

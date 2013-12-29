@@ -17,6 +17,7 @@
 		885E4FF7186FC7EE0033442A /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF3186FC7EE0033442A /* JBChartView.m */; };
 		885E4FF8186FC7EE0033442A /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF5186FC7EE0033442A /* JBLineChartView.m */; };
 		885E4FFC186FCB630033442A /* JCChartVieControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FFB186FCB630033442A /* JCChartVieControllerViewController.m */; };
+		885E5000186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FFF186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.m */; };
 		88D8801F186B91F200EA1D4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D8801E186B91F200EA1D4D /* Foundation.framework */; };
 		88D88021186B91F200EA1D4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88020186B91F200EA1D4D /* CoreGraphics.framework */; };
 		88D88023186B91F200EA1D4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88022186B91F200EA1D4D /* UIKit.framework */; };
@@ -73,6 +74,8 @@
 		885E4FFA186FCB630033442A /* JCChartVieControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCChartVieControllerViewController.h; sourceTree = "<group>"; };
 		885E4FFB186FCB630033442A /* JCChartVieControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCChartVieControllerViewController.m; sourceTree = "<group>"; };
 		885E4FFD186FCBC30033442A /* HeartRateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeartRateController.h; sourceTree = "<group>"; };
+		885E4FFE186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFetchedResultsController+JCHeartRateMonitor.h"; sourceTree = "<group>"; };
+		885E4FFF186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFetchedResultsController+JCHeartRateMonitor.m"; sourceTree = "<group>"; };
 		88D8801B186B91F200EA1D4D /* HeartRateMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D8801E186B91F200EA1D4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		88D88020186B91F200EA1D4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -304,6 +307,8 @@
 			children = (
 				88F94F1E186D288500E7D741 /* JCCoreDataManager.h */,
 				88F94F1F186D288500E7D741 /* JCCoreDataManager.m */,
+				885E4FFE186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.h */,
+				885E4FFF186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.m */,
 			);
 			name = CoreData;
 			sourceTree = "<group>";
@@ -417,6 +422,7 @@
 				88D8806A186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m in Sources */,
 				883F7F7D186D3E68001B193C /* _JCHeartRateMonitor.m in Sources */,
 				88D88060186BD4DB00EA1D4D /* JCHeartRateMonitor.m in Sources */,
+				885E5000186FCE660033442A /* NSFetchedResultsController+JCHeartRateMonitor.m in Sources */,
 				883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */,
 				88D88035186B91F200EA1D4D /* JCViewController.m in Sources */,
 				883F7F85186D5751001B193C /* CBPeripheral+HeartRateAccessors.m in Sources */,

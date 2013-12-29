@@ -8,6 +8,7 @@
 
 #import "JCHeartRateTableViewController.h"
 #import "JCHeartRateMonitor.h"
+#import "NSFetchedResultsController+JCHeartRateMonitor.h"
 
 @interface JCHeartRateTableViewController () <NSFetchedResultsControllerDelegate, JCHeartRateMonitorDelegate>
 @property (nonatomic, strong) NSFetchedResultsController *frc;
@@ -27,14 +28,10 @@
     self.formatter.timeStyle = NSDateFormatterMediumStyle;
     self.formatter.dateStyle = NSDateFormatterMediumStyle;
 
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:[JCHeartRateMeasurement entityName]];
-    fetchRequest.predicate = [NSPredicate predicateWithFormat:@"heartRateMonitor == %@", self.monitor];
-    fetchRequest.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO]];
+    self.frc = [NSFetchedResultsController controllerForFetchingMeasurementsForHeartRateMonitor:self.monitor
+                                                                         inManagedObjectContext:self.monitor.managedObjectContext
+                                                                                      ascending:NO];
 
-    self.frc = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                   managedObjectContext:self.monitor.managedObjectContext
-                                                     sectionNameKeyPath:Nil
-                                                              cacheName:@"hr"];
     self.frc.delegate = self;
     NSError *error;
     [self.frc performFetch:&error];

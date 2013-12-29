@@ -2,6 +2,8 @@
 
 An investigation into Blutetooth LE by Jesse Collis
 
+_The project may serve as a reasonable example of how to implement Core Data as well._
+
 ## Status
 
 - **December 2013** - Work in Progress
