@@ -16,6 +16,7 @@
 		885E4FF6186FC7EE0033442A /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF1186FC7EE0033442A /* JBBarChartView.m */; };
 		885E4FF7186FC7EE0033442A /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF3186FC7EE0033442A /* JBChartView.m */; };
 		885E4FF8186FC7EE0033442A /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF5186FC7EE0033442A /* JBLineChartView.m */; };
+		885E4FFC186FCB630033442A /* JCChartVieControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FFB186FCB630033442A /* JCChartVieControllerViewController.m */; };
 		88D8801F186B91F200EA1D4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D8801E186B91F200EA1D4D /* Foundation.framework */; };
 		88D88021186B91F200EA1D4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88020186B91F200EA1D4D /* CoreGraphics.framework */; };
 		88D88023186B91F200EA1D4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88022186B91F200EA1D4D /* UIKit.framework */; };
@@ -69,6 +70,9 @@
 		885E4FF3186FC7EE0033442A /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JBChartView.m; path = ../../lib/JBChartView/Classes/JBChartView.m; sourceTree = "<group>"; };
 		885E4FF4186FC7EE0033442A /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JBLineChartView.h; path = ../../lib/JBChartView/Classes/JBLineChartView.h; sourceTree = "<group>"; };
 		885E4FF5186FC7EE0033442A /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JBLineChartView.m; path = ../../lib/JBChartView/Classes/JBLineChartView.m; sourceTree = "<group>"; };
+		885E4FFA186FCB630033442A /* JCChartVieControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JCChartVieControllerViewController.h; sourceTree = "<group>"; };
+		885E4FFB186FCB630033442A /* JCChartVieControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JCChartVieControllerViewController.m; sourceTree = "<group>"; };
+		885E4FFD186FCBC30033442A /* HeartRateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeartRateController.h; sourceTree = "<group>"; };
 		88D8801B186B91F200EA1D4D /* HeartRateMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D8801E186B91F200EA1D4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		88D88020186B91F200EA1D4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -162,10 +166,13 @@
 			children = (
 				88D88068186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.h */,
 				88D88069186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m */,
+				885E4FFD186FCBC30033442A /* HeartRateController.h */,
 				88D88033186B91F200EA1D4D /* JCViewController.h */,
 				88D88034186B91F200EA1D4D /* JCViewController.m */,
 				883F7F7F186D4BF2001B193C /* JCHeartRateTableViewController.h */,
 				883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */,
+				885E4FFA186FCB630033442A /* JCChartVieControllerViewController.h */,
+				885E4FFB186FCB630033442A /* JCChartVieControllerViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -402,6 +409,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				885E4FFC186FCB630033442A /* JCChartVieControllerViewController.m in Sources */,
 				88D88066186BDE0900EA1D4D /* JCBluetoothPeripheral.m in Sources */,
 				885E4FF8186FC7EE0033442A /* JBLineChartView.m in Sources */,
 				883F7F77186D3DF1001B193C /* DataModel.xcdatamodeld in Sources */,

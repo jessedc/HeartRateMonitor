@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HeartRateController.h"
 
 @class JCHeartRateMonitor;
 
-@interface JCHeartRateTableViewController : UITableViewController
-
-- (void)configureWithHeartRateMonitor:(JCHeartRateMonitor *)monitor;
+@interface JCHeartRateTableViewController : UITableViewController <HeartRateController>
 
 @end

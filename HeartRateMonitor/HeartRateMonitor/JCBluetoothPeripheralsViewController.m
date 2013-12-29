@@ -102,7 +102,7 @@
 
 - (void)manager:(JCHeartRateDeviceManager *)manager didConnectHeartRateMonitor:(JCHeartRateMonitor *)monitor
 {
-    JCHeartRateTableViewController *heartRateController = [self.storyboard instantiateViewControllerWithIdentifier:@"HeartRateTable"];
+    UIViewController<HeartRateController> *heartRateController = [self.storyboard instantiateViewControllerWithIdentifier:@"HeartRateChart"];
     [heartRateController configureWithHeartRateMonitor:monitor];
 
     [self.navigationController pushViewController:heartRateController animated:YES];
