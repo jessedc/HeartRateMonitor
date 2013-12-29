@@ -1,0 +1,3 @@
+[submodule "lib/JBChartView"]
+	path = lib/JBChartView
+	url = git@github.com:Jawbone/JBChartView.git

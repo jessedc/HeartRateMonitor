@@ -13,6 +13,9 @@
 		883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */; };
 		883F7F85186D5751001B193C /* CBPeripheral+HeartRateAccessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F84186D5751001B193C /* CBPeripheral+HeartRateAccessors.m */; };
 		883F7F88186D586E001B193C /* CBService+HeartRateAccessors.m in Sources */ = {isa = PBXBuildFile; fileRef = 883F7F87186D586E001B193C /* CBService+HeartRateAccessors.m */; };
+		885E4FF6186FC7EE0033442A /* JBBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF1186FC7EE0033442A /* JBBarChartView.m */; };
+		885E4FF7186FC7EE0033442A /* JBChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF3186FC7EE0033442A /* JBChartView.m */; };
+		885E4FF8186FC7EE0033442A /* JBLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 885E4FF5186FC7EE0033442A /* JBLineChartView.m */; };
 		88D8801F186B91F200EA1D4D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D8801E186B91F200EA1D4D /* Foundation.framework */; };
 		88D88021186B91F200EA1D4D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88020186B91F200EA1D4D /* CoreGraphics.framework */; };
 		88D88023186B91F200EA1D4D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88D88022186B91F200EA1D4D /* UIKit.framework */; };
@@ -60,6 +63,12 @@
 		883F7F84186D5751001B193C /* CBPeripheral+HeartRateAccessors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBPeripheral+HeartRateAccessors.m"; sourceTree = "<group>"; };
 		883F7F86186D586E001B193C /* CBService+HeartRateAccessors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CBService+HeartRateAccessors.h"; sourceTree = "<group>"; };
 		883F7F87186D586E001B193C /* CBService+HeartRateAccessors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CBService+HeartRateAccessors.m"; sourceTree = "<group>"; };
+		885E4FF0186FC7EE0033442A /* JBBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JBBarChartView.h; path = ../../lib/JBChartView/Classes/JBBarChartView.h; sourceTree = "<group>"; };
+		885E4FF1186FC7EE0033442A /* JBBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JBBarChartView.m; path = ../../lib/JBChartView/Classes/JBBarChartView.m; sourceTree = "<group>"; };
+		885E4FF2186FC7EE0033442A /* JBChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JBChartView.h; path = ../../lib/JBChartView/Classes/JBChartView.h; sourceTree = "<group>"; };
+		885E4FF3186FC7EE0033442A /* JBChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JBChartView.m; path = ../../lib/JBChartView/Classes/JBChartView.m; sourceTree = "<group>"; };
+		885E4FF4186FC7EE0033442A /* JBLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JBLineChartView.h; path = ../../lib/JBChartView/Classes/JBLineChartView.h; sourceTree = "<group>"; };
+		885E4FF5186FC7EE0033442A /* JBLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JBLineChartView.m; path = ../../lib/JBChartView/Classes/JBLineChartView.m; sourceTree = "<group>"; };
 		88D8801B186B91F200EA1D4D /* HeartRateMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HeartRateMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		88D8801E186B91F200EA1D4D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		88D88020186B91F200EA1D4D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -148,10 +157,46 @@
 			name = "CoreBluetooth Additions";
 			sourceTree = "<group>";
 		};
+		885E4FEE186FC7860033442A /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				88D88068186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.h */,
+				88D88069186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m */,
+				88D88033186B91F200EA1D4D /* JCViewController.h */,
+				88D88034186B91F200EA1D4D /* JCViewController.m */,
+				883F7F7F186D4BF2001B193C /* JCHeartRateTableViewController.h */,
+				883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		885E4FEF186FC7910033442A /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				885E4FF9186FC7F40033442A /* JBChartView */,
+			);
+			name = "Third Party";
+			path = HeartRateMonitor;
+			sourceTree = "<group>";
+		};
+		885E4FF9186FC7F40033442A /* JBChartView */ = {
+			isa = PBXGroup;
+			children = (
+				885E4FF0186FC7EE0033442A /* JBBarChartView.h */,
+				885E4FF1186FC7EE0033442A /* JBBarChartView.m */,
+				885E4FF2186FC7EE0033442A /* JBChartView.h */,
+				885E4FF3186FC7EE0033442A /* JBChartView.m */,
+				885E4FF4186FC7EE0033442A /* JBLineChartView.h */,
+				885E4FF5186FC7EE0033442A /* JBLineChartView.m */,
+			);
+			name = JBChartView;
+			sourceTree = "<group>";
+		};
 		88D88012186B91F200EA1D4D = {
 			isa = PBXGroup;
 			children = (
 				88D88053186B920100EA1D4D /* README.mdown */,
+				885E4FEF186FC7910033442A /* Third Party */,
 				88D88024186B91F200EA1D4D /* HeartRateMonitor */,
 				88D88043186B91F200EA1D4D /* HeartRateMonitorTests */,
 				88D8801C186B91F200EA1D4D /* Products */,
@@ -191,16 +236,11 @@
 				88D8802D186B91F200EA1D4D /* JCAppDelegate.h */,
 				88D8802E186B91F200EA1D4D /* JCAppDelegate.m */,
 				88D88030186B91F200EA1D4D /* Main.storyboard */,
-				88D88068186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.h */,
-				88D88069186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m */,
-				88D88033186B91F200EA1D4D /* JCViewController.h */,
-				88D88034186B91F200EA1D4D /* JCViewController.m */,
+				885E4FEE186FC7860033442A /* View Controllers */,
 				883F7F75186D3DF1001B193C /* DataModel.xcdatamodeld */,
 				88D88036186B91F200EA1D4D /* Images.xcassets */,
 				88D8801D186B91F200EA1D4D /* Frameworks */,
 				88D88025186B91F200EA1D4D /* Supporting Files */,
-				883F7F7F186D4BF2001B193C /* JCHeartRateTableViewController.h */,
-				883F7F80186D4BF2001B193C /* JCHeartRateTableViewController.m */,
 			);
 			path = HeartRateMonitor;
 			sourceTree = "<group>";
@@ -309,6 +349,9 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = JCMultimedia;
 				TargetAttributes = {
+					88D8801A186B91F200EA1D4D = {
+						DevelopmentTeam = HKAHNB7JV2;
+					};
 					88D8803B186B91F200EA1D4D = {
 						TestTargetID = 88D8801A186B91F200EA1D4D;
 					};
@@ -360,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				88D88066186BDE0900EA1D4D /* JCBluetoothPeripheral.m in Sources */,
+				885E4FF8186FC7EE0033442A /* JBLineChartView.m in Sources */,
 				883F7F77186D3DF1001B193C /* DataModel.xcdatamodeld in Sources */,
 				88D8802B186B91F200EA1D4D /* main.m in Sources */,
 				88D8806A186BE23A00EA1D4D /* JCBluetoothPeripheralsViewController.m in Sources */,
@@ -368,11 +412,13 @@
 				883F7F81186D4BF2001B193C /* JCHeartRateTableViewController.m in Sources */,
 				88D88035186B91F200EA1D4D /* JCViewController.m in Sources */,
 				883F7F85186D5751001B193C /* CBPeripheral+HeartRateAccessors.m in Sources */,
+				885E4FF6186FC7EE0033442A /* JBBarChartView.m in Sources */,
 				883F7F88186D586E001B193C /* CBService+HeartRateAccessors.m in Sources */,
 				88D88063186BDC3A00EA1D4D /* JCHeartRateDeviceManager.m in Sources */,
 				88F94F20186D288500E7D741 /* JCCoreDataManager.m in Sources */,
 				88D8805D186BD37700EA1D4D /* JCHeartRateMeasurement.m in Sources */,
 				88D8802F186B91F200EA1D4D /* JCAppDelegate.m in Sources */,
+				885E4FF7186FC7EE0033442A /* JBChartView.m in Sources */,
 				883F7F7C186D3E68001B193C /* _JCHeartRateMeasurement.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
